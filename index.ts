@@ -18,13 +18,25 @@ export default async function(req: NowRequest, res: NowResponse) {
     return;
   }
 
-  const assets = ["MLN", "DAI", "MKR", "KNC"];
+  const assets = [
+    "BAT",
+    "DAI",
+    "DGX",
+    "KNC",
+    "MKR",
+    "MLN",
+    "REP",
+    "USDC",
+    "WBTC",
+    "ETH",
+    "ZRX"
+  ];
 
   let path = `/v1/exchangerate/${base}`;
   if (quote) {
     path = path + `/${quote}`;
   } else {
-    path = path + "/" + assets.join(",");
+    path = path + "?filter_asset_id=" + assets.join(";");
   }
 
   const response = await coinApi.get(path);
