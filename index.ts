@@ -14,13 +14,17 @@ export default async function(req: NowRequest, res: NowResponse) {
   // TODO: check base and quote against predefined list
 
   if (!base) {
-    res.send("Invalid request: base and/or quote not set.");
+    res.send("Invalid request: base not set.");
     return;
   }
+
+  const assets = ["MLN", "DAI", "MKR", "KNC"];
 
   let path = `/v1/exchangerate/${base}`;
   if (quote) {
     path = path + `/${quote}`;
+  } else {
+    path = path + "/" + assets.join(",");
   }
 
   const response = await coinApi.get(path);
