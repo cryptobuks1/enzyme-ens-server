@@ -2,7 +2,7 @@ import { NowRequest, NowResponse } from "@now/node";
 import Axios from "axios";
 
 export default async function(req: NowRequest, res: NowResponse) {
-  const { name = "World" } = req.query;
+  const { name = "World", base, quote } = req.query;
 
   const coinApi = Axios.create({
     baseURL: "https://swapi.co/api"
@@ -17,5 +17,5 @@ export default async function(req: NowRequest, res: NowResponse) {
   const data = JSON.stringify(response.data);
 
   res.setHeader("Cache-Control", "maxage=0, s-maxage=600");
-  res.send(`Hello ${name}! Rate: ${data}`);
+  res.send(`Hello ${name}! Base: ${base}, quote: ${quote}. Data: ${data}`);
 }
