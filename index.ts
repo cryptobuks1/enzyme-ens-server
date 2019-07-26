@@ -47,5 +47,8 @@ export default async function(req: NowRequest, res: NowResponse) {
 
   res.setHeader("Cache-Control", "maxage=0, s-maxage=600");
   res.setHeader("Content-Type", "application/json");
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.send(response.data);
 }
