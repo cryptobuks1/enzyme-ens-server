@@ -1,6 +1,6 @@
-import { NowRequest, NowResponse } from '@now/node'
+import { NowRequest, NowResponse } from "@now/node";
 
 export default function(req: NowRequest, res: NowResponse) {
-  const { name = 'World' } = req.query
-  res.send(`Hello ${name}!`)
+  const { name = "World" } = req.query;
+  res.send(`Hello ${name}!`);
 }
