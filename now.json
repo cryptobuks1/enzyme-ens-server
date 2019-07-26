@@ -4,6 +4,7 @@
   "build": {
     "env": {
       "COINAPI_KEY": "@coinapi-key"
-    }
+    },
+    "alias": "coinapi.now.sh"
   }
 }
