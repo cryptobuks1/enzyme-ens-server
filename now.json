@@ -1,4 +1,4 @@
 {
   "version": 2,
-  "builds": [{ "src": "api/fx/index.ts", "use": "@now/node" }]
+  "builds": [{ "src": "index.ts", "use": "@now/node" }]
 }
