@@ -5,10 +5,18 @@ export default async function(req: NowRequest, res: NowResponse) {
   const { name = "World", base, quote } = req.query;
 
   const coinApi = Axios.create({
-    baseURL: "https://swapi.co/api"
+    baseURL: "https://rest.coinapi.io",
+    headers: {
+      "X-CoinAPI-Key": "6F388926-927B-4582-AE90-B1C8CD3D5B60"
+    }
   });
 
-  const response = await coinApi.get(`/people/1`);
+  if (!base || !quote) {
+    res.send(`base and/or quote not set`);
+    return;
+  }
+
+  const response = await coinApi.get(`/v1/exchangerate/${base}/${quote}`);
 
   if (!!response.data.error) {
     throw new Error(response.data.error);
