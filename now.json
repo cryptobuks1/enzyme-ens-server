@@ -1,10 +1,5 @@
 {
   "version": 2,
   "builds": [{ "src": "index.ts", "use": "@now/node" }],
-  "build": {
-    "env": {
-      "COINAPI_KEY": "@coinapi-key"
-    },
-    "alias": "coinapi.now.sh"
-  }
+  "alias": "coinapi.now.sh"
 }
