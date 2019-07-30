@@ -11,14 +11,7 @@ export default async function(req: NowRequest, res: NowResponse) {
     }
   });
 
-  // TODO: check base and quote against predefined list
-
-  if (!base) {
-    res.send("Invalid request: base not set.");
-    return;
-  }
-
-  const assets = [
+  const allowedAssets = [
     "BAT",
     "DAI",
     "DGX",
@@ -29,14 +22,29 @@ export default async function(req: NowRequest, res: NowResponse) {
     "USDC",
     "WBTC",
     "ETH",
-    "ZRX"
+    "ZRX",
+    "USD"
   ];
 
-  let path = `/v1/exchangerate/${base}`;
-  if (quote) {
+  let path = "/v1/exchangerate/";
+  if (
+    base &&
+    typeof base === "string" &&
+    allowedAssets.includes(base as string)
+  ) {
+    path = path + base;
+  } else {
+    path = path + "ETH";
+  }
+
+  if (
+    quote &&
+    typeof quote === "string" &&
+    allowedAssets.includes(quote as string)
+  ) {
     path = path + `/${quote}`;
   } else {
-    path = path + "?filter_asset_id=" + assets.join(";");
+    path = path + "?filter_asset_id=" + allowedAssets.join(";");
   }
 
   const response = await coinApi.get(path);
@@ -48,7 +56,7 @@ export default async function(req: NowRequest, res: NowResponse) {
   res.setHeader("Cache-Control", "maxage=0, s-maxage=600");
   res.setHeader("Content-Type", "application/json");
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+  res.setHeader("Access-Control-Allow-Methods", "GET");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.send(response.data);
 }
