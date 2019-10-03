@@ -2,7 +2,7 @@
   "devDependencies": {
     "@now/node": "^0.11.1",
     "@types/node": "^12.6.8",
-    "typescript": "^3.5.3"
+    "typescript": "^3.6.3"
   },
   "dependencies": {
     "web3-eth": "^2.0.0-alpha.1"
