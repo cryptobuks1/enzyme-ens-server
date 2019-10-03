@@ -980,7 +980,7 @@ web3-eth-personal@2.0.0-alpha.1:
     web3-providers "2.0.0-alpha.1"
     web3-utils "2.0.0-alpha.1"
 
-web3-eth@^2.0.0-alpha.1:
+web3-eth@2.0.0-alpha.1, web3-eth@^2.0.0-alpha.1:
   version "2.0.0-alpha.1"
   resolved "https://registry.yarnpkg.com/web3-eth/-/web3-eth-2.0.0-alpha.1.tgz#d11ab4934a8b5d06de6823cebda2075510782139"
   integrity sha512-XJro1RPdhxKLYaOhUsTU5TuEPVdGyWbuPOTuqGUFZjyVnJ2dd6ETQIwmz9q7A6cIoYy9XZhni99mJ3ILLZzrMg==
@@ -1032,6 +1032,20 @@ web3-providers@2.0.0-alpha.1:
     websocket "github:web3-js/WebSocket-Node#polyfill/globalThis"
     xhr2-cookies "1.1.0"
 
+web3-shh@2.0.0-alpha.1:
+  version "2.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/web3-shh/-/web3-shh-2.0.0-alpha.1.tgz#e555dd00f8600270ecdeff465ab54cc07b5d3e6e"
+  integrity sha512-Be6nizwB9ZQ/oCy1smPE30Y6rTDxjV+zmW+89kk1e9B6nLuTQwE/5DoHUU5+7AzfouKZcMI2QMH3Kf6M8BpalQ==
+  dependencies:
+    "@babel/runtime" "^7.3.1"
+    web3-core "2.0.0-alpha.1"
+    web3-core-helpers "2.0.0-alpha.1"
+    web3-core-method "2.0.0-alpha.1"
+    web3-core-subscriptions "2.0.0-alpha.1"
+    web3-net "2.0.0-alpha.1"
+    web3-providers "2.0.0-alpha.1"
+    web3-utils "2.0.0-alpha.1"
+
 web3-utils@2.0.0-alpha.1:
   version "2.0.0-alpha.1"
   resolved "https://registry.yarnpkg.com/web3-utils/-/web3-utils-2.0.0-alpha.1.tgz#231442adea3b58bca0c7185ee5b7743c01938682"
@@ -1047,6 +1061,21 @@ web3-utils@2.0.0-alpha.1:
     number-to-bn "1.7.0"
     randombytes "^2.1.0"
     utf8 "2.1.1"
+
+web3@^2.0.0-alpha.1:
+  version "2.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/web3/-/web3-2.0.0-alpha.1.tgz#cfc0cef8c94d312ae943f268d6b42ebada521150"
+  integrity sha512-njwdP8MsziYYu9BGXvq9326xViWe6Q4/I/sq/AKOqfLWgLhAJ9xYkP8U6v0AclNE8Ow447dV3b9eK3sOLS1/WQ==
+  dependencies:
+    "@babel/runtime" "^7.3.1"
+    "@types/node" "^12.6.1"
+    web3-core "2.0.0-alpha.1"
+    web3-eth "2.0.0-alpha.1"
+    web3-eth-personal "2.0.0-alpha.1"
+    web3-net "2.0.0-alpha.1"
+    web3-providers "2.0.0-alpha.1"
+    web3-shh "2.0.0-alpha.1"
+    web3-utils "2.0.0-alpha.1"
 
 "websocket@github:web3-js/WebSocket-Node#polyfill/globalThis":
   version "1.0.29"

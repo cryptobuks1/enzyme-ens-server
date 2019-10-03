@@ -1,8 +1,9 @@
 import { NowRequest, NowResponse } from "@now/node";
-import Eth from "web3-eth";
+import Web3 from "web3";
+import { Eth } from "web3-eth";
 
 export default async function(req: NowRequest, res: NowResponse) {
-  const eth = new Eth(Eth.givenProvider || process.env.ETHNODE_MAINNET);
+  const eth = new Eth(Web3.givenProvider || process.env.ETHNODE_MAINNET);
 
   const { d } = req.query;
 
