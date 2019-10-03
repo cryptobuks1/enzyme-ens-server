@@ -1,5 +1,5 @@
 {
   "version": 2,
   "builds": [{ "src": "index.ts", "use": "@now/node" }],
-  "alias": "ens.melonprotocol.now.sh"
+  "alias": "ens.melon.network"
 }
