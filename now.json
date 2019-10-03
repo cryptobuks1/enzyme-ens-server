@@ -1,5 +1,8 @@
 {
   "version": 2,
   "builds": [{ "src": "index.ts", "use": "@now/node" }],
-  "alias": "ens.melon.network"
+  "alias": "ens.melon.network",
+  "env": {
+    "ETHNODE_MAINNET": "@ethnode-mainnet"
+  }
 }

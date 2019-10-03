@@ -2,7 +2,7 @@ import { NowRequest, NowResponse } from "@now/node";
 import Eth from "web3-eth";
 
 export default async function(req: NowRequest, res: NowResponse) {
-  const eth = new Eth(Eth.givenProvider || "https://mainnet.melonport.com");
+  const eth = new Eth(Eth.givenProvider || process.env.ETHNODE_MAINNET);
 
   const { d } = req.query;
 
