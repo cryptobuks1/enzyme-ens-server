@@ -1,62 +1,45 @@
 import { NowRequest, NowResponse } from "@now/node";
-import Axios from "axios";
+import Eth from "web3-eth";
 
 export default async function(req: NowRequest, res: NowResponse) {
-  const { base, quote } = req.query;
+  const eth = new Eth(Eth.givenProvider || "https://mainnet.melonport.com");
 
-  const coinApi = Axios.create({
-    baseURL: "https://rest.coinapi.io",
-    headers: {
-      "X-CoinAPI-Key": "6F388926-927B-4582-AE90-B1C8CD3D5B60"
-    }
-  });
+  const { d } = req.query;
 
-  const allowedAssets = [
-    "BAT",
-    "DAI",
-    "DGX",
-    "KNC",
-    "MKR",
-    "MLN",
-    "REP",
-    "USDC",
-    "WBTC",
-    "ETH",
-    "ZRX",
-    "USD"
+  const standardNames = [
+    "melontoken",
+    "version",
+    "registry",
+    "fundfactory",
+    "kyberpricefeed",
+    "engine",
+    "engineadapter",
+    "ethfinexadapter",
+    "kyberadapter",
+    "matchingmarketadapter",
+    "zeroexv2adapter",
+    "fundranking",
+    "managementfee",
+    "performancefee"
   ];
 
-  let path = "/v1/exchangerate/";
-  if (
-    base &&
-    typeof base === "string" &&
-    allowedAssets.includes(base as string)
-  ) {
-    path = path + base;
-  } else {
-    path = path + "ETH";
-  }
+  const names = d && typeof d === "string" ? d.split(",") : standardNames;
 
-  if (
-    quote &&
-    typeof quote === "string" &&
-    allowedAssets.includes(quote as string)
-  ) {
-    path = path + `/${quote}`;
-  } else {
-    path = path + "?filter_asset_id=" + allowedAssets.join(";");
-  }
+  const adr = await Promise.all(
+    names.map(async name => {
+      const ens = `${name}.melonprotocol.eth`;
 
-  const response = await coinApi.get(path);
+      return {
+        ens,
+        address: (await eth.ens.getAddress(ens)).toLowerCase()
+      };
+    })
+  );
 
-  if (!!response.data.error) {
-    throw new Error(response.data.error);
-  }
-
-  res.setHeader("Cache-Control", "maxage=0, s-maxage=600");
+  res.setHeader("Cache-Control", "maxage=0, s-maxage=3600");
   res.setHeader("Content-Type", "application/json");
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  res.send(response.data);
+  res.send(adr);
 }
