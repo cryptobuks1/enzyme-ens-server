@@ -1,9 +1,8 @@
 import { NowRequest, NowResponse } from "@now/node";
 import Web3 from "web3";
-import { Eth } from "web3-eth";
 
 export default async function(req: NowRequest, res: NowResponse) {
-  const eth = new Eth(Web3.givenProvider || process.env.ETHNODE_MAINNET);
+  const web3 = new Web3(Web3.givenProvider || process.env.ETHNODE_MAINNET);
 
   const { d } = req.query;
 
@@ -12,14 +11,14 @@ export default async function(req: NowRequest, res: NowResponse) {
     "version",
     "registry",
     "fundfactory",
-    "kyberpricefeed",
+    "pricefeed",
     "engine",
     "engineadapter",
-    "ethfinexadapter",
+    "uniswapadapter",
     "kyberadapter",
-    "matchingmarketadapter",
+    "oasisdexadapter",
     "zeroexv2adapter",
-    "fundranking",
+    "zeroexv3adapter",
     "managementfee",
     "performancefee"
   ];
@@ -32,7 +31,7 @@ export default async function(req: NowRequest, res: NowResponse) {
 
       return {
         ens,
-        address: (await eth.ens.getAddress(ens)).toLowerCase()
+        address: (await web3.eth.ens.getAddress(ens)).toLowerCase()
       };
     })
   );

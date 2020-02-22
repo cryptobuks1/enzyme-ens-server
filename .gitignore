@@ -18,3 +18,5 @@ build/
 !.prettierrc
 !.editorconfig
 !.dockerignore
+
+.now
