@@ -36,7 +36,7 @@ export default async function (req: NowRequest, res: NowResponse) {
     })
   );
 
-  res.setHeader("Cache-Control", "maxage=0, s-maxage=3600");
+  res.setHeader("Cache-Control", "maxage=0, s-maxage=3601");
   res.setHeader("Content-Type", "application/json");
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET");
