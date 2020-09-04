@@ -1,7 +1,7 @@
-import { NowRequest, NowResponse } from "@now/node";
+import { NowRequest, NowResponse } from "@vercel/node";
 import Web3 from "web3";
 
-export default async function(req: NowRequest, res: NowResponse) {
+export default async function (req: NowRequest, res: NowResponse) {
   const web3 = new Web3(Web3.givenProvider || process.env.ETHNODE_MAINNET);
 
   const { d } = req.query;
@@ -20,18 +20,18 @@ export default async function(req: NowRequest, res: NowResponse) {
     "zeroexv2adapter",
     "zeroexv3adapter",
     "managementfee",
-    "performancefee"
+    "performancefee",
   ];
 
   const names = d && typeof d === "string" ? d.split(",") : standardNames;
 
   const adr = await Promise.all(
-    names.map(async name => {
+    names.map(async (name) => {
       const ens = `${name}.melonprotocol.eth`;
 
       return {
         ens,
-        address: (await web3.eth.ens.getAddress(ens)).toLowerCase()
+        address: (await web3.eth.ens.getAddress(ens)).toLowerCase(),
       };
     })
   );
